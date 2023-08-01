@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>To do list</title>
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+  <div class="wrapper">
+
+    <div class="input-box">
+      <i class="uil uil-align-left"></i>
+      <input type="text" placeholder="Enter para adicionar uma nova tarefa">
+    </div>
+
+    <div class="controls">
+      <nav class="filters">
+        <span id="all">Tudo</span>
+        <span id="pending">Pendentes</span>
+        <span id="completed">Completos</span>
+      </nav>
+      <button class="btn-clear">Limpar</button>
+    </div>
+
+    <ul class="task-list">
+      <li class="task">
+        <label for="0">
+          <input type="checkbox" id="0">
+          <p>Comprar carro</p>
+        </label>
+        <div class="task-menu">
+          <i class="uil uil-ellipsis-h"></i>
+          <ul class="settings">
+            <li>
+              <i class="uil uil-pen"></i>
+              <span>Editar</span>
+            </li>
+            <li>
+              <i class="uil uil-trash-alt"></i>
+              <span>Deletar</span>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="task">
+        <label for="0">
+          <input type="checkbox" id="0">
+          <p>Comprar carro</p>
+        </label>
+        <div class="task-menu">
+          <i class="uil uil-ellipsis-h"></i>
+          <ul class="settings">
+            <li>
+              <i class="uil uil-pen"></i>
+              <span>Editar</span>
+            </li>
+            <li>
+              <i class="uil uil-trash-alt"></i>
+              <span>Deletar</span>
+            </li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+
+  </div>
+</body>
+
+</html>

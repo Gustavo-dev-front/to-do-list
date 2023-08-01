@@ -1,0 +1,139 @@
+@charset "UTF-8";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  font-size: 1rem;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  position: relative;
+  background-color: #53f56d;
+  min-height: 100vh;
+}
+
+.wrapper {
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
+  max-width: max-content;
+  background-color: #ffffff;
+  border-radius: 5px;
+}
+
+.input-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  color: #cccccc;
+}
+
+.input-box i {
+  position: absolute;
+  left: 25px;
+}
+
+.input-box input {
+  width: 100%;
+  padding: 10px 10px 10px 25px;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+}
+
+.input-box input::placeholder {
+  color: #cccccc;
+}
+
+.controls {
+  display: flex;
+  padding: 10px 20px;
+  justify-content: space-between;
+  gap: 10px;
+  border-bottom: 1px solid #cccccc;
+}
+
+.controls .filters {
+  display: flex;
+  gap: 10px;
+}
+
+.controls .filters span {
+  cursor: pointer;
+}
+
+.controls .filters span.active {
+  color: #53f56d;
+}
+
+.controls .btn-clear {
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+  background: #53f56d;
+  color: #ffffff;
+}
+
+.task-list {
+  padding: 10px 20px;
+}
+
+.task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+}
+
+.task:not(:last-child) {
+  border-bottom: 1px solid #cccccc;
+}
+
+.task label {
+  display: flex;
+  gap: 10px;
+}
+
+.task .task-menu {
+  position: relative;
+  cursor: pointer;
+}
+
+.task .settings {
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  background-color: #ffffff;
+  overflow: hidden;
+  transform: scale(0);
+  transform-origin: top left;
+  transition: 0.3s ease;
+}
+
+.task .task-menu:hover .settings {
+  transform: scale(1);
+}
+
+.task .settings li {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px;
+}
+
+.task .settings li:hover {
+  background-color: #f5f5f5;
+}
+
+@media only screen and (max-width: 500px) {
+  .task .settings {
+    right: 0px;
+    transform-origin: top right;
+  }
+}
