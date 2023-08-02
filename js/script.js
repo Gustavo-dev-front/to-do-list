@@ -6,13 +6,21 @@ if (!toDoList) {
   toDoList = [];
 }
 
+function updateStatus(index, input) {
+  if (input.checked) toDoList[index].status = "completed";
+  else toDoList[index].status = "pending";
+  localStorage.setItem("to-do-list", JSON.stringify(toDoList));
+}
+
 function showTasks() {
   const emptyMsg = "Não há tarefas cadastradas aqui";
   let tasks = "";
+  let isCompleted;
   toDoList.forEach((item, index) => {
+    isCompleted = item.status === "completed" ? "checked" : "";
     tasks += `<li class="task">
                   <label for="${index}">
-                    <input type="checkbox" id="${index}">
+                    <input type="checkbox" id="${index}" onclick="updateStatus(${index}, this)" ${isCompleted}>
                     <p>${item.text}</p>
                   </label>
                   <div class="task-menu">

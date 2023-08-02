@@ -98,6 +98,10 @@ body {
   gap: 10px;
 }
 
+.task label input:checked + p {
+  text-decoration: line-through;
+}
+
 .task .task-menu {
   position: relative;
   cursor: pointer;
