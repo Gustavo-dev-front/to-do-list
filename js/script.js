@@ -6,6 +6,35 @@ if (!toDoList) {
   toDoList = [];
 }
 
+function deleteTask(index) {
+  toDoList.splice(index, 1);
+  localStorage.setItem("to-do-list", JSON.stringify(toDoList));
+  showTasks();
+}
+
+function outsideClick(event, element, html, callback) {
+  html.classList.add("event-active");
+  if (!element.contains(event.target)) {
+    element.classList.remove("active");
+    html.classList.remove("event-active");
+    html.removeEventListener("click", callback);
+  }
+}
+
+function showMenu(menu) {
+  const menuToHidde = document.querySelector(".task-menu.active");
+  const html = document.documentElement;
+  if (menuToHidde) menuToHidde.classList.remove("active");
+  menu.classList.add("active");
+
+  const callback = (event) => {
+    outsideClick(event, menu, html, callback);
+  };
+
+  if (!html.classList.contains("event-active"))
+    html.addEventListener("click", callback);
+}
+
 function updateStatus(index, input) {
   if (input.checked) toDoList[index].status = "completed";
   else toDoList[index].status = "pending";
@@ -23,14 +52,14 @@ function showTasks() {
                     <input type="checkbox" id="${index}" onclick="updateStatus(${index}, this)" ${isCompleted}>
                     <p>${item.text}</p>
                   </label>
-                  <div class="task-menu">
+                  <div class="task-menu" onclick="showMenu(this)">
                     <i class="uil uil-ellipsis-h"></i>
                     <ul class="settings">
                       <li>
                         <i class="uil uil-pen"></i>
                         <span>Editar</span>
                       </li>
-                      <li>
+                      <li onclick="deleteTask(${index})">
                         <i class="uil uil-trash-alt"></i>
                         <span>Deletar</span>
                       </li>
