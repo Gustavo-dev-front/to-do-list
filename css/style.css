@@ -76,6 +76,7 @@ body {
   border-radius: 5px;
   background: #53f56d;
   color: #ffffff;
+  cursor: pointer;
 }
 
 .task-list {

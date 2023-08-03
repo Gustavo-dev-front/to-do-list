@@ -1,9 +1,17 @@
 const input = document.querySelector(".input-box input");
 const taskList = document.querySelector(".task-list");
+const btnClear = document.querySelector(".btn-clear");
 let toDoList = JSON.parse(localStorage.getItem("to-do-list"));
 
 if (!toDoList) {
   toDoList = [];
+}
+
+function clearAll() {
+  const length = toDoList.length;
+  toDoList.splice(0, length);
+  localStorage.setItem("to-do-list", JSON.stringify(toDoList));
+  showTasks();
 }
 
 function deleteTask(index) {
@@ -92,6 +100,7 @@ function init() {
     }
   });
 
+  btnClear.addEventListener("click", clearAll);
   showTasks();
 }
 
