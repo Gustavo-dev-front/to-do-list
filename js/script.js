@@ -1,23 +1,45 @@
 const input = document.querySelector(".input-box input");
 const taskList = document.querySelector(".task-list");
 const btnClear = document.querySelector(".btn-clear");
+const filterList = [...document.querySelectorAll(".filters span")];
+let activeFilterIndex = localStorage.getItem("active-filter-index");
 let toDoList = JSON.parse(localStorage.getItem("to-do-list"));
 
 if (!toDoList) {
   toDoList = [];
 }
 
+if (!activeFilterIndex) {
+  activeFilterIndex = 0;
+  localStorage.setItem("active-filter-index", activeFilterIndex);
+  filter(activeFilterIndex);
+}
+
+filterList.forEach((item, index) => {
+  item.addEventListener("click", () => {
+    filter(index);
+  });
+});
+
+function filter(index) {
+  filterList[activeFilterIndex].classList.remove("active");
+  activeFilterIndex = index;
+  filterList[activeFilterIndex].classList.add("active");
+  localStorage.setItem("active-filter-index", activeFilterIndex);
+  showTasks(filterList[activeFilterIndex].id);
+}
+
 function clearAll() {
   const length = toDoList.length;
   toDoList.splice(0, length);
   localStorage.setItem("to-do-list", JSON.stringify(toDoList));
-  showTasks();
+  filter(activeFilterIndex);
 }
 
 function deleteTask(index) {
   toDoList.splice(index, 1);
   localStorage.setItem("to-do-list", JSON.stringify(toDoList));
-  showTasks();
+  filter(activeFilterIndex);
 }
 
 function outsideClick(event, element, html, callback) {
@@ -49,13 +71,14 @@ function updateStatus(index, input) {
   localStorage.setItem("to-do-list", JSON.stringify(toDoList));
 }
 
-function showTasks() {
+function showTasks(filter) {
   const emptyMsg = "Não há tarefas cadastradas aqui";
   let tasks = "";
   let isCompleted;
   toDoList.forEach((item, index) => {
-    isCompleted = item.status === "completed" ? "checked" : "";
-    tasks += `<li class="task">
+    if (filter === item.status || filter === "all" || !filter) {
+      isCompleted = item.status === "completed" ? "checked" : "";
+      tasks += `<li class="task">
                   <label for="${index}">
                     <input type="checkbox" id="${index}" onclick="updateStatus(${index}, this)" ${isCompleted}>
                     <p>${item.text}</p>
@@ -74,6 +97,7 @@ function showTasks() {
                     </ul>
                   </div>
                 </li>`;
+    }
   });
 
   taskList.innerHTML = tasks || emptyMsg;
@@ -82,7 +106,7 @@ function showTasks() {
 function saveTask(task) {
   toDoList.push(task);
   localStorage.setItem("to-do-list", JSON.stringify(toDoList));
-  showTasks();
+  filter(activeFilterIndex);
 }
 
 function createTask(value) {
@@ -100,8 +124,8 @@ function init() {
     }
   });
 
+  filter(activeFilterIndex);
   btnClear.addEventListener("click", clearAll);
-  showTasks();
 }
 
 init();
