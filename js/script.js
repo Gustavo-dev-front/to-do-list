@@ -86,6 +86,7 @@ function init() {
     let value = input.value;
 
     if (event.key === "Enter" && value.length > 0) {
+      input.value = "";
       const task = createTask(value);
       saveTask(task);
     }
