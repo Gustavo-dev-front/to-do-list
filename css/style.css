@@ -85,12 +85,25 @@ body {
   padding: 10px 20px;
 }
 
+@keyframes show-task {
+  from {
+    opacity: 0;
+    transform: translate(0px, -50px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(0px, 0px);
+  }
+}
+
 .task {
   display: flex;
   justify-content: space-between;
   gap: 10px;
   align-items: center;
   padding: 15px 0;
+  animation: show-task 0.3s linear;
 }
 
 .task:not(:last-child) {
