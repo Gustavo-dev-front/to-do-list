@@ -1,9 +1,11 @@
 const input = document.querySelector(".input-box input");
+let toDoList = JSON.parse(localStorage.getItem("to-do-list"));
 const taskList = document.querySelector(".task-list");
 const btnClear = document.querySelector(".btn-clear");
 const filterList = [...document.querySelectorAll(".filters span")];
 let activeFilterIndex = localStorage.getItem("active-filter-index");
-let toDoList = JSON.parse(localStorage.getItem("to-do-list"));
+let isEdit = false;
+let editId;
 
 if (!toDoList) {
   toDoList = [];
@@ -34,6 +36,13 @@ function clearAll() {
   toDoList.splice(0, length);
   localStorage.setItem("to-do-list", JSON.stringify(toDoList));
   filter(activeFilterIndex);
+}
+
+function editTask(index) {
+  isEdit = true;
+  editId = index;
+  input.value = toDoList[index].text;
+  input.focus();
 }
 
 function deleteTask(index) {
@@ -86,7 +95,7 @@ function showTasks(filter) {
                   <div class="task-menu" onclick="showMenu(this)">
                     <i class="uil uil-ellipsis-h"></i>
                     <ul class="settings">
-                      <li>
+                      <li onclick="editTask(${index})">
                         <i class="uil uil-pen"></i>
                         <span>Editar</span>
                       </li>
@@ -118,9 +127,16 @@ function init() {
     let value = input.value;
 
     if (event.key === "Enter" && value.length > 0) {
+      if (isEdit) {
+        toDoList[editId].text = value;
+        localStorage.setItem("to-do-list", JSON.stringify(toDoList));
+        isEdit = false;
+      } else {
+        const task = createTask(value);
+        saveTask(task);
+      }
       input.value = "";
-      const task = createTask(value);
-      saveTask(task);
+      filter(activeFilterIndex);
     }
   });
 
