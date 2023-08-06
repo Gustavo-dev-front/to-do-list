@@ -16,10 +16,8 @@ body {
 }
 
 .wrapper {
-  position: absolute;
-  top: 50%;
-  right: 50%;
-  transform: translate(50%, -50%);
+  position: relative;
+  margin: 2rem auto;
   width: 90%;
   max-width: 500px;
   background-color: #ffffff;
@@ -51,21 +49,24 @@ body {
 }
 
 .controls {
-  display: flex;
-  padding: 10px 20px;
-  justify-content: space-between;
-  gap: 10px;
-  flex-wrap: wrap;
-  border-bottom: 1px solid #cccccc;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateX(calc(-100% - 10px));
+  background-color: #ffffff;
+  border-radius: 5px;
+  padding: 10px;
+  transition: all 0.3s ease;
 }
 
 .controls .filters {
-  display: flex;
-  gap: 10px;
+  display: grid;
+  margin-bottom: 5px;
 }
 
 .controls .filters span {
   cursor: pointer;
+  padding: 5px;
 }
 
 .controls .filters span.active {
@@ -79,6 +80,12 @@ body {
   background: #53f56d;
   color: #ffffff;
   cursor: pointer;
+}
+
+.output h1 {
+  border-top: 1px solid #cccccc;
+  padding-top: 10px;
+  text-indent: 10px;
 }
 
 .task-list {
@@ -150,6 +157,29 @@ body {
 
 .task .settings li:hover {
   background-color: #f5f5f5;
+}
+
+@media only screen and (max-width: 800px) {
+  .controls {
+    position: static;
+    transform: unset;
+    background-color: unset;
+    border-radius: unset;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 0 20px 10px 20px;
+    flex-wrap: wrap;
+  }
+
+  .controls .filters {
+    display: flex;
+    gap: 10px;
+  }
+
+  .controls .filters span {
+    padding: unset;
+  }
 }
 
 @media only screen and (max-width: 500px) {
